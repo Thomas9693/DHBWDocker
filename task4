@@ -1,0 +1,34 @@
+#docker pull tutum/apache-php
+latest: Pulling from tutum/apache-php
+428b411c28f0: Already exists
+435050075b3f: Already exists
+9fd3c8c9af32: Already exists
+6d4946999d4f: Already exists
+69ab8cce6739: Already exists
+749dfd85a905: Already exists
+782ad13f5670: Already exists
+3692158fed3e: Already exists
+f38b6aa9fc07: Already exists
+3920093ca7ed: Already exists
+1b6bcddf1d3b: Already exists
+483a91aaa3f9: Already exists
+594507bb2445: Already exists
+34f9ae4bd51e: Already exists
+5063ca68363d: Already exists
+cdced04212b6: Already exists
+cdced04212b6: Already exists
+Digest: sha256:6d21118f57fd5415638b0744be140c16e40353e2bc06659c8c8ffeadae648cfc
+Status: Image is up to date for tutum/apache-php:latest
+#docker rum tutum/apache-php
+==> /var/log/apache2/access.log <==
+
+==> /var/log/apache2/error.log <==
+
+==> /var/log/apache2/other_vhosts_access.log <==
+
+==> /var/log/apache2/error.log <==
+[Mon Apr 04 16:11:01.335648 2016] [mpm_prefork:notice] [pid 1] AH00163: Apache/2.4.7 (Ubuntu) PHP/5.5.9-1ubuntu4.11 configured -- resuming normal operations
+[Mon Apr 04 16:11:01.336900 2016] [core:notice] [pid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
+#docker ps -l
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+4d703bda0cd7        centos:latest       "/bin/bash"         7 seconds ago       Up 6 seconds                            elated_babbage      

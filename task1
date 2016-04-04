@@ -1,0 +1,18 @@
+#docker pull centos
+latest: Pulling from centos
+47d44cb6f252: Already exists
+8aa7f4a1dd13: Already exists
+e0f5867add13: Already exists
+eeb3a076a0be: Already exists
+Digest: sha256:1b9adf413b3ab95ce430c2039954bb0db0c8e2672c48182f2c5b3d30373d5b71
+Status: Image is up to date for centos:latest
+#run -i -t centos /bin/bash
+]0;@1d2a812e40c4:/[?1034h[root@1d2a812e40c4 /]# ^C
+]0;@1d2a812e40c4:/[root@1d2a812e40c4 /]# ^C
+]0;@1d2a812e40c4:/[root@1d2a812e40c4 /]# ^C
+]0;@1d2a812e40c4:/[root@1d2a812e40c4 /]#  141.31.8.237 141.31.8.237 141.31.8.237 141.31.8.237 141. 31.8.237 141.31.8.237 141.31.8.237 141.31.8.237 141.31.8.237asd 
+#uname -a (on Ubuntu Server)
+Linux DHBW-cloud-desk2 3.19.0-49-generic #55~14.04.1-Ubuntu SMP Fri Jan 22 11:24:31 UTC 2016 x86_64 x86_64 x86_64 GNU/Linux
+#uname -a (on Docker centos)
+Linux 8fc2bc791e8e 3.19.0-49-generic #55~14.04.1-Ubuntu SMP Fri Jan 22 11:24:31 UTC 2016 x86_64 x86_64 x86_64 GNU/Linux
+
