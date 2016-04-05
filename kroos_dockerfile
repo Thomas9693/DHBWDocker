@@ -1,0 +1,9 @@
+##############################################################
+# Dockerfile for tutum/apache-php Team Kroos
+##############################################################
+
+FROM tutum/apache-php
+
+MAINTAINER Kroos
+
+EXPOSE 9060
