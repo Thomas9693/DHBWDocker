@@ -1,0 +1,20 @@
+#docker build -t kroos_new -f kroos_dockerfile . > output
+Sending build context to Docker daemon 71.68 kB
+
+Sending build context to Docker daemon 
+Step 0 : FROM tutum/apache-php
+ ---> cdced04212b6
+Step 1 : MAINTAINER Kroos
+ ---> Using cache
+ ---> 6d920338969e
+Step 2 : EXPOSE 9060
+ ---> Using cache
+ ---> 054518dc1b83
+Step 3 : RUN echo "<html><head><title>Hello World</title></head><body>Johannes Reimund, Thomas Ksoll</body></html>" > /var/www/html/index.php
+ ---> Using cache
+ ---> 4496cf93a3c2
+Successfully built 4496cf93a3c2
+#docker run -i -t kroos_new /bin/bash
+# cat /var/www/html/index.php 
+<html><head><title>Hello World</title></head><body>Johannes Reimund, Thomas Ksoll</body></html>
+

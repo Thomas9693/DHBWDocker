@@ -8,4 +8,7 @@ MAINTAINER Kroos
 
 EXPOSE 9060
 
-RUN echo "<html><head><title>Hello World</title></head><body>Johannes Reimund, Thomas Ksoll</body></html>" > /var/www/html/index.php
+RUN sudo apt-get update
+RUN sudo apt-get install -y openssh-server
+RUN sed -i '137s/.*/LogLevel Error/' /etc/apache2/apache2.conf 	
+CMD /etc/init.d/ssh start
