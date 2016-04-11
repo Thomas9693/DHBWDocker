@@ -11,6 +11,7 @@ Step 2 : EXPOSE 9060
  ---> Using cache
  ---> 054518dc1b83
 Successfully built 054518dc1b83
+
 #docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
 kroos               latest              054518dc1b83        6 minutes ago       244.7 MB
@@ -18,15 +19,22 @@ centos              latest              eeb3a076a0be        3 days ago          
 ubuntu              latest              56063ad57855        4 weeks ago         188 MB
 hello-world         latest              975b84d108f1        5 months ago        960 B
 tutum/apache-php    latest              cdced04212b6        9 months ago        244.7 MB
+
 #docker run -i -t kroos /bin/bash
 ]0;root@c013f6389e2c: /approot@c013f6389e2c:/app# ^C
+
 #cd /var/www/html
+
 #vi index.php
+
 #docker stop ad3304381872
 ad3304381872
+
 #docker commit ad3304381872 kroos
 7626413d91db74ae52bc8cfb7d2153a166fb9253078becf4a5e4d1e0fcea1440
+
 #docker run -i -t kroos /bin/bash
+
 #cat /var/www/html/index.php 
 <html>
 

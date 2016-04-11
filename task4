@@ -19,6 +19,7 @@ cdced04212b6: Already exists
 cdced04212b6: Already exists
 Digest: sha256:6d21118f57fd5415638b0744be140c16e40353e2bc06659c8c8ffeadae648cfc
 Status: Image is up to date for tutum/apache-php:latest
+
 #docker rum tutum/apache-php
 ==> /var/log/apache2/access.log <==
 
@@ -29,6 +30,7 @@ Status: Image is up to date for tutum/apache-php:latest
 ==> /var/log/apache2/error.log <==
 [Mon Apr 04 16:11:01.335648 2016] [mpm_prefork:notice] [pid 1] AH00163: Apache/2.4.7 (Ubuntu) PHP/5.5.9-1ubuntu4.11 configured -- resuming normal operations
 [Mon Apr 04 16:11:01.336900 2016] [core:notice] [pid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
+
 #docker ps -l
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
 4d703bda0cd7        centos:latest       "/bin/bash"         7 seconds ago       Up 6 seconds                            elated_babbage      

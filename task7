@@ -14,7 +14,9 @@ Step 3 : RUN echo "<html><head><title>Hello World</title></head><body>Johannes R
  ---> Using cache
  ---> 4496cf93a3c2
 Successfully built 4496cf93a3c2
+
 #docker run -i -t kroos_new /bin/bash
+
 # cat /var/www/html/index.php 
 <html><head><title>Hello World</title></head><body>Johannes Reimund, Thomas Ksoll</body></html>
 
