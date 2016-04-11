@@ -5,5 +5,3 @@
 FROM tutum/apache-php
 
 MAINTAINER Kroos
-
-EXPOSE 9060

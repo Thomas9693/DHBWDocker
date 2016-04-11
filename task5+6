@@ -33,12 +33,26 @@ ad3304381872
 #docker commit ad3304381872 kroos
 7626413d91db74ae52bc8cfb7d2153a166fb9253078becf4a5e4d1e0fcea1440
 
-#docker run -i -t kroos /bin/bash
+#docker run -P 9060:80 -i -t kroos /bin/bash
 
-#cat /var/www/html/index.php 
-<html>
+#wget localhost:9060
+kroos@cloud-ubu1404-desk:~$ wget localhost:9060
+--2016-04-11 18:07:38--  http://localhost:9060/
+Resolving localhost (localhost)... 127.0.0.1
+Connecting to localhost (localhost)|127.0.0.1|:9060... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 96 [text/html]
+Saving to: ‘index.html’
 
-<head><title>Hello World</title></head>
-<body>Johannes Reimund, Thomas Ksoll</body>
-</html>
+100%[======================================================================================>] 96          --.-K/s   in 0s      
+
+2016-04-11 18:07:38 (14,9 MB/s) - ‘index.html’ saved [96/96]
+
+kroos@cloud-ubu1404-desk:~$ ls
+Docker  examples.desktop  index.html  output
+
+#cat index.html 
+<html><head><title>Hello World</title></head><body>Johannes Reimund, Thomas Ksoll</body></html>
+
+
 

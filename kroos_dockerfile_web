@@ -6,8 +6,6 @@ FROM tutum/apache-php
 
 MAINTAINER Kroos
 
-EXPOSE 9060
-
 RUN sudo apt-get update
 RUN sudo apt-get install -y openssh-server
 RUN sed -i '137s/.*/LogLevel Error/' /etc/apache2/apache2.conf 	

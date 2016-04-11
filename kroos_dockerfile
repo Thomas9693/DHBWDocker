@@ -6,6 +6,6 @@ FROM tutum/apache-php
 
 MAINTAINER Kroos
 
-EXPOSE 9060
-
 RUN echo "<html><head><title>Hello World</title></head><body>Johannes Reimund, Thomas Ksoll</body></html>" > /var/www/html/index.php
+
+
