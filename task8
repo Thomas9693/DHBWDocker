@@ -1,5 +1,5 @@
-#docker build -t kroos_web -f kroos_dockerfile_web . > output
-Sending build context to Docker daemon 75.78 kB
+#docker build -t kroos_web -f kroos_dockerfile_web . > task8
+Sending build context to Docker daemon 119.3 kB
 
 Sending build context to Docker daemon 
 Step 0 : FROM tutum/apache-php
@@ -7,44 +7,122 @@ Step 0 : FROM tutum/apache-php
 Step 1 : MAINTAINER Kroos
  ---> Using cache
  ---> 6d920338969e
-Step 2 : EXPOSE 9060
+Step 2 : RUN sudo apt-get update
  ---> Using cache
- ---> 054518dc1b83
-Step 3 : RUN sudo apt-get update
+ ---> 9f913cc7db9a
+Step 3 : RUN sudo apt-get install -y openssh-server
  ---> Using cache
- ---> 18d5a009ffb4
-Step 4 : RUN sudo apt-get install -y openssh-server
+ ---> 04352913060c
+Step 4 : RUN sed -i '137s/.*/LogLevel Error/' /etc/apache2/apache2.conf
  ---> Using cache
- ---> 62d42cbad4f3
-Step 5 : RUN sed -i '137s/.*/LogLevel Error/' /etc/apache2/apache2.conf
+ ---> d9db10f2d189
+Step 5 : RUN mkdir /var/run/sshd
  ---> Using cache
- ---> f662e470df4c
-Step 6 : CMD /etc/init.d/ssh start
+ ---> f74adeb69122
+Step 6 : RUN echo 'root:screencast'| chpasswd
  ---> Using cache
- ---> 9ade8338ca88
-Successfully built 9ade8338ca88
-Sending build context to Docker daemon  76.8 kB
+ ---> 3bb243814416
+Step 7 : RUN sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+ ---> Using cache
+ ---> ec43d20ccc64
+Step 8 : RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
+ ---> Using cache
+ ---> ba40ecaf9c15
+Step 9 : ENV NOTVISIBLE "in users profile"
+ ---> Using cache
+ ---> dfce0a6b0164
+Step 10 : RUN echo "export VISIBLE=now" >> /etc/profile
+ ---> Using cache
+ ---> dc25a4ef87bd
+Step 11 : EXPOSE 22
+ ---> Using cache
+ ---> f4f1ce32a1ad
+Step 12 : CMD /usr/sbin/sshd -D
+ ---> Using cache
+ ---> 8ef7cb58ad98
+Successfully built 8ef7cb58ad98
+Sending build context to Docker daemon 120.8 kB
 
-#docker build -t kroos_develop -f kroos_dockerfile_develop . >> output
+
+#docker build -t kroos_develop -f kroos_dockerfile_develop . >> task8
 Sending build context to Docker daemon 
 Step 0 : FROM tutum/apache-php
  ---> cdced04212b6
 Step 1 : MAINTAINER Kroos
  ---> Using cache
  ---> 6d920338969e
-Step 2 : EXPOSE 9060
+Step 2 : RUN sudo apt-get update
  ---> Using cache
- ---> 054518dc1b83
-Step 3 : RUN sudo apt-get update
+ ---> 9f913cc7db9a
+Step 3 : RUN sudo apt-get install -y openssh-server
  ---> Using cache
- ---> 18d5a009ffb4
-Step 4 : RUN sudo apt-get install -y openssh-server
+ ---> 04352913060c
+Step 4 : RUN sed -i '137s/.*/LogLevel trace1/' /etc/apache2/apache2.conf
  ---> Using cache
- ---> 62d42cbad4f3
-Step 5 : RUN sed -i '137s/.*/LogLevel trace1/' /etc/apache2/apache2.conf
+ ---> 45629ada4b80
+Step 5 : RUN mkdir /var/run/sshd
  ---> Using cache
- ---> 90f989eaa4c0
-Step 6 : CMD /etc/init.d/ssh start
+ ---> d18dc2cdc64a
+Step 6 : RUN echo 'root:screencast'| chpasswd
  ---> Using cache
- ---> b0dc29562e87
-Successfully built b0dc29562e87
+ ---> dcd3174a141e
+Step 7 : RUN sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+ ---> Using cache
+ ---> b3c3e5c4fa56
+Step 8 : RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
+ ---> Using cache
+ ---> 5f4952aed873
+Step 9 : ENV NOTVISIBLE "in users profile"
+ ---> Using cache
+ ---> c98d92eecd34
+Step 10 : RUN echo "export VISIBLE=now" >> /etc/profile
+ ---> Using cache
+ ---> 2f5bda6812f1
+Step 11 : EXPOSE 22
+ ---> Running in 0aaf1b4b0344
+ ---> dd269d69e0ad
+Removing intermediate container 0aaf1b4b0344
+Step 12 : CMD /usr/sbin/sshd -D
+ ---> Running in c5a00adaeba7
+ ---> 6eb6303c3b29
+Removing intermediate container c5a00adaeba7
+Successfully built 6eb6303c3b29
+
+#docker run -P -d kroos_web
+
+#docker ps -l
+85819834799a        kroos_web:latest    "/usr/sbin/sshd -D"   30 seconds ago      Up 30 seconds       0.0.0.0:32772->22/tcp, 0.0.0.0:32773->80/tcp   stoic_thompson 
+
+
+#docker run --name=ssh_test_kroos -d -P kroos_web
+f1a4d03be11e56370a01e94202b7c51c307e8d803e00a3bd697322dfc7341b04
+
+#docker ps -l
+CONTAINER ID        IMAGE               COMMAND               CREATED             STATUS              PORTS                                          NAMES
+f1a4d03be11e        kroos_web:latest    "/usr/sbin/sshd -D"   6 seconds ago       Up 5 seconds        0.0.0.0:32774->22/tcp, 0.0.0.0:32775->80/tcp   ssh_test_kroos      
+
+#docker port ssh_test_kroos 
+22/tcp -> 0.0.0.0:32774
+80/tcp -> 0.0.0.0:32775
+
+#ssh root@localhost -p 32774
+The authenticity of host '[localhost]:32774 ([127.0.0.1]:32774)' can't be established.
+ECDSA key fingerprint is eb:0a:80:aa:5c:26:4b:66:cd:f5:92:c2:dc:fa:68:4e.
+Are you sure you want to continue connecting (yes/no)? y
+Please type 'yes' or 'no': ye
+Please type 'yes' or 'no': yes
+Warning: Permanently added '[localhost]:32774' (ECDSA) to the list of known hosts.
+root@localhost's password: screencast
+Welcome to Ubuntu 14.04 LTS (GNU/Linux 3.2.0-77-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com/
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+root@f1a4d03be11e:~# 
+

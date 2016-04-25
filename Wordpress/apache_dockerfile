@@ -1,13 +1,15 @@
 ##############################################################
-# Dockerfile for tutum/apache-php Team Kroos
+# Dockerfile for tutum/apache-php incl. Wordpress Team Kroos
 ##############################################################
 
 FROM tutum/apache-php
 
 MAINTAINER Kroos
 
+#Install apache and set ssh server
 RUN sudo apt-get update
 RUN sudo apt-get install -y openssh-server
+RUN sudo apt-get install -y wget
 RUN sed -i '137s/.*/LogLevel Error/' /etc/apache2/apache2.conf 	
 RUN mkdir /var/run/sshd
 RUN echo 'root:screencast'| chpasswd
@@ -15,5 +17,16 @@ RUN sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/' /etc/ssh/ss
 RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
 ENV NOTVISIBLE "in users profile"
 RUN echo "export VISIBLE=now" >> /etc/profile
+
+#Setup Wordpress
+RUN wget https://de.wordpress.org/wordpress-4.5-de_DE.zip -P /tmp
+RUN unzip /tmp/wordpress-4.5-de_DE.zip
+RUN cp -r wordpress/* /var/www/html
+RUN sed -i 's/datenbankname_hier_einfuegen/wordpress_db/g' /var/www/html/wp-config-sample.php
+RUN sed -i 's/benutzername_hier_einfuegen/wordpress_user/g' /var/www/html/wp-config-sample.php
+RUN sed -i 's/Füge hier deine Zeichenkette ein/P@$$w0rd/g' /var/www/html/wp-config-sample.php
+RUN cp /var/www/html/wp-config-sample.php /var/www/html/wp-config.php
+
+
 EXPOSE 22
 CMD ["/usr/sbin/sshd", "-D"]

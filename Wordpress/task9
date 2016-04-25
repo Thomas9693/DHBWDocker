@@ -1,0 +1,7 @@
+#docker pull mysql
+
+#docker run --name kroos_wordpress_sql -e MYSQL_DATABASE=wordpress_db MYSQL_USER=wordpress_user MYSQL_PASSWORD=P@$$w0d -d mysql:5.6
+
+#docker build -t kroos_mysql -f apache_dockerfile .
+
+#docker run --name kroos_wordpress --link kross_wordpress_sql:mysql -d -p 9060:80
