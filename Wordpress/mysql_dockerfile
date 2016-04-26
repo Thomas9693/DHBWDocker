@@ -1,9 +1,0 @@
-##############################################################
-# Dockerfile for MySQL Team Kroos
-##############################################################
-
-FROM tutum/mysql
-
-MAINTAINER Kroos
-
- /var/www/html/wp-config-sample.php 

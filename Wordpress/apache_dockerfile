@@ -9,7 +9,7 @@ MAINTAINER Kroos
 #Install apache and set ssh server
 RUN sudo apt-get update
 RUN sudo apt-get install -y openssh-server
-RUN sudo apt-get install -y wget
+RUN sudo apt-get install -y wget unzip
 RUN sed -i '137s/.*/LogLevel Error/' /etc/apache2/apache2.conf 	
 RUN mkdir /var/run/sshd
 RUN echo 'root:screencast'| chpasswd
@@ -29,4 +29,6 @@ RUN cp /var/www/html/wp-config-sample.php /var/www/html/wp-config.php
 
 
 EXPOSE 22
-CMD ["/usr/sbin/sshd", "-D"]
+CMD service ssh start && service apache2 start && tail -F /var/log/apache2/error.log
+
+
